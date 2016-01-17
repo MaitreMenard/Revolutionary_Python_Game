@@ -9,8 +9,6 @@ class combattant():
         self.vivant = True
         self.heal_counts = 1
         self.cooldown = 0
-        self.enemy_poisonned = False
-        self.compteur_poison = 0
         self.level = level
         self.maxhp = hp
         self.hp = hp
@@ -48,24 +46,14 @@ class combattant():
     def poison(self):
         succès = random.randrange(100)
         if succès > 24:
-            self.enemy_poisonned = True
-            self.compteur_poison = 4
+            poisonDmg = (3 + math.floor(self.Matk/2))
+            nbrTurns = 4
             print("The enemy is now poisonned for 4 turns.")
+            return[True, poisonDmg, nbrTurns]
         else:
             print("Attack missed !")
-    
-    def poison_dmg(self):
-        poison_dmg = 0
-        if self.enemy_poisonned == True:
-            if self.compteur_poison > 0:
-                self.compteur_poison -= 1
-                poison_dmg = (3 + math.floor(self.Matk/2))
-            else:
-                self.enemy_poisonned = False
-                self.compteur_poison = 0
-                print("Poison faded")
-        return poison_dmg
-            
+            return[False, 0, 0]
+        
     def ult(self):
         succès = random.randrange(100)
         if succès > 49:

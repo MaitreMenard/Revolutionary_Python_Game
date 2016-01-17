@@ -10,6 +10,7 @@ class adversaire():
         self.hp = hp
         self.atk = atk
         self.defense = defense
+        self.poisonned = [False, 0, 0]
         
     def attack_1(self):
         print("The enemy used his basic attack.")
@@ -42,9 +43,16 @@ class adversaire():
             return damageReceived
         else:
             print("Your attack was blocked!")
-            return 0
+            return 0      
     
-    def poisonDamage(self, dmg):
-        if dmg > 0:
-            self.hp -= dmg
-            print("The enemy was hurt by poison. The enemy's HP -" + str(dmg))
+    def status(self):
+        if self.poisonned[0] == True:
+            if self.poisonned[2] > 0:
+                self.poisonned[2] -= 1
+                self.hp -= self.poisonned[1]
+                print("The enemy was hurt by poison. The enemy's HP -" + str(self.poisonned[1]))
+            else:
+                self.poisonned[0] = False
+                self.poisonned[1] = 0
+                self.poisonned[2] = 0
+                print("Poison faded")

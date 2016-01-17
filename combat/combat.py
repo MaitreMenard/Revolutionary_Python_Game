@@ -16,7 +16,7 @@ class Combat:
         #self.combattant1 = combattant1
         #self.combattant2 = combattant2
         self.combattant1 = combattant.combattant(level = int(stats[0]), hp = int(stats[1]), atk = int(stats[2]), defense = int(stats[3]), Matk = int(stats[4]), exp = int(stats[5]), weapon = equipement.IronSword(int(stats[7])))
-        self.combattant2 = adversaire.adversaire(hp = 120, atk = 15, defense = 12)
+        self.combattant2 = adversaire.adversaire(hp = 120, atk = 20, defense = 15)
         self.lastInput = None
         self.c1DmgReceived = 0
         self.c1Healing = 0
@@ -40,12 +40,13 @@ class Combat:
     
     def process(self):
         damageDealt = 0
+        statusGiven = [False, 0, 0]
         if self.lastInput.lower() == "q":
             damageDealt = self.combattant1.attack_1()
         elif self.lastInput.lower() == "w":
             damageDealt = self.combattant1.attack_2()
         elif self.lastInput.lower() == "e":
-            self.combattant1.poison()
+            statusGiven = self.combattant1.poison()
         elif self.lastInput.lower() == "r":
             if self.combattant1.cooldown == 0:
                 damageDealt = self.combattant1.ult()   
@@ -71,6 +72,9 @@ class Combat:
         if damageDealt != 0:
             self.c2DmgReceived = self.combattant2.damage(damageDealt)
             
+        if statusGiven[0] == True:
+            self.combattant2.poisonned = statusGiven
+            
         damageReceived = 0
         if self.combattant2.hp > 0:
             x = random.randrange(100)
@@ -86,8 +90,8 @@ class Combat:
             self.c1DmgReceived = self.combattant1.damage(damageReceived)
     
         if self.combattant2.hp > 0:
-            self.c2PsnDmg = self.combattant1.poison_dmg()
-            self.combattant2.poisonDamage(self.c2PsnDmg)
+            self.combattant2.status()
+            self.c2PsnDmg = self.combattant2.poisonned[1]
         
         if self.combattant1.cooldown > 0:
             self.combattant1.cooldown -= 1

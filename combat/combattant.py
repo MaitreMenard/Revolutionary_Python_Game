@@ -17,6 +17,8 @@ class combattant():
         self.Matk = Matk
         self.exp = exp
         self.weapon = weapon
+        self.inventory = {'head', 'top', 'bottom', 'shoes', 'gloves', 'cape', 'pendant', 'ring',
+                           'weapons', 'subweapon'}
         self.summary()
     
     def summary(self):
@@ -78,9 +80,9 @@ class combattant():
     def info(self):
         move = input("Press the key of the move on which you want infos : ")
         if move == "q":
-            print("Your basic attack.\nDamage : 10 + {}\nAccuracy : 90 %\n\n".format(self.atk + self.weapon.atk))
+            print("Your basic ability.\nDamage : 10 + {}\nAccuracy : 90 %\n\n".format(self.atk + self.weapon.atk))
         elif move == "w":
-            print("Your special attack. \nDamage : 20 + {}\nAccuracy : 75 %\n\n".format(self.atk + self.weapon.atk))
+            print("Your special ability. \nDamage : 20 + {}\nAccuracy : 75 %\n\n".format(self.atk + self.weapon.atk))
         elif move == "e":
             print("Poison your ennemy for 4 turns. \nDamage each turn : 3 + {}\nAccuracy : 75 %\n\n".format(str(math.floor(self.Matk/2))))
         elif move == "r":
@@ -129,5 +131,5 @@ class combattant():
             print("Your HP -" + str(damageReceived))
             return damageReceived
         else:
-            print("The enemy's attack was blocked!")
+            print("The enemy's ability was blocked!")
             return 0

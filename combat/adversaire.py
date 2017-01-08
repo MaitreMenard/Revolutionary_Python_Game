@@ -13,17 +13,17 @@ class adversaire():
         self.poisonned = [False, 0, 0]
         
     def attack_1(self):
-        print("The enemy used his basic attack.")
+        print("The enemy used his basic ability.")
         succès = random.randrange(100)
         if succès > 19:
             dmg = (12 + self.atk)
         else:
-            print("The enemy's attack missed !")
+            print("The enemy's ability missed !")
             dmg = 0
         return dmg
         
     def attack_2(self):
-        print("The enemy used his special attack.")
+        print("The enemy used his special ability.")
         dmg = 0
         succès = random.randrange(100)
         if succès > 39:
@@ -42,7 +42,7 @@ class adversaire():
             print("The enemy's HP -" + str(damageReceived))
             return damageReceived
         else:
-            print("Your attack was blocked!")
+            print("Your ability was blocked!")
             return 0      
     
     def status(self):

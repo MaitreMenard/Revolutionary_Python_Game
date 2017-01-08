@@ -67,7 +67,7 @@ class Combat:
             print("\n")
             return True
         else:
-            print("You failed to select a valid move. You don't attack this turn.")
+            print("You failed to select a valid move. You don't ability this turn.")
         
         if damageDealt != 0:
             self.c2DmgReceived = self.combattant2.damage(damageDealt)
@@ -99,7 +99,7 @@ class Combat:
         return False
     
     def render(self):
-        #combattant1's attack animation
+        #combattant1's ability animation
         
         #combattant1's damage dealt
         self.barre2.racourcir(self.c2DmgReceived)
@@ -111,7 +111,7 @@ class Combat:
         self.barre1.allonger(self.c1Healing)
         self.c1Healing = 0
         
-        #combattant2's attack animation
+        #combattant2's ability animation
         
         #combattant2's damage dealt
         self.barre1.racourcir(self.c1DmgReceived)
